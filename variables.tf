@@ -795,6 +795,40 @@ variable "runtime_platform" {
   default     = []
 }
 
+variable "ordered_placement_strategy" {
+  type = list(object({
+    type  = string
+    field = string
+  }))
+  default     = []
+  description = <<-EOT
+    Service level strategy rules that are taken into consideration during task placement.
+    List from top to bottom in order of precedence. The maximum number of ordered_placement_strategy blocks is 5.
+    See [`ordered_placement_strategy`](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_service#ordered_placement_strategy)
+    EOT
+}
+
+variable "task_placement_constraints" {
+  type = list(object({
+    type       = string
+    expression = string
+  }))
+  default     = []
+  description = <<-EOT
+    A set of placement constraints rules that are taken into consideration during task placement.
+    Maximum number of placement_constraints is 10. See [`placement_constraints`](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition#placement-constraints-arguments)
+    EOT
+}
+
+variable "service_placement_constraints" {
+  type = list(object({
+    type       = string
+    expression = string
+  }))
+  description = "The rules that are taken into consideration during task placement. Maximum number of placement_constraints is 10. See [`placement_constraints`](https://www.terraform.io/docs/providers/aws/r/ecs_service.html#placement_constraints-1) docs"
+  default     = []
+}
+
 variable "github_webhook_events" {
   type        = list(string)
   description = "A list of events which should trigger the webhook. See a list of [available events](https://developer.github.com/v3/activity/events/types/)"
