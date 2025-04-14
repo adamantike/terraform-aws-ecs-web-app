@@ -205,6 +205,9 @@ module "ecs_alb_service_task" {
   circuit_breaker_rollback_enabled   = var.circuit_breaker_rollback_enabled
   permissions_boundary               = var.permissions_boundary
   runtime_platform                   = var.runtime_platform
+  ordered_placement_strategy         = var.ordered_placement_strategy
+  task_placement_constraints         = var.task_placement_constraints
+  service_placement_constraints      = var.service_placement_constraints
 
   context = module.this.context
 }
